@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title> with 8 march💐</title>
+  <title>Happy Women’s Day 💐</title>
   <style>
     :root { --bg:#0b1020; --card:#131a33; --text:#eef2ff; --muted:#a9b0d6; --accent:#ff6fb1; --ok:#41d17a; --bad:#ff4d6d; }
     *{ box-sizing:border-box; }
@@ -21,9 +21,7 @@
       display:flex; align-items:center; justify-content:space-between; gap:12px;
       margin-bottom:14px;
     }
-    .brand{
-      display:flex; flex-direction:column; gap:4px;
-    }
+    .brand{ display:flex; flex-direction:column; gap:4px; }
     .brand h1{ margin:0; font-size:22px; letter-spacing:.2px; }
     .brand p{ margin:0; color:var(--muted); font-size:14px; }
     .pill{
@@ -73,11 +71,9 @@
     }
     .score{ color:var(--text); font-weight:750; }
     .center{ text-align:center; }
-    .big{
-      font-size:34px; margin:10px 0 6px 0;
-      letter-spacing:.2px;
-    }
+    .big{ font-size:34px; margin:10px 0 6px 0; letter-spacing:.2px; }
 
+    /* Game 1: Memory */
     .memory{ display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:10px; }
     @media (max-width:520px){ .memory{ grid-template-columns:repeat(3, minmax(0, 1fr)); } }
     .mcard{
@@ -87,20 +83,20 @@
       min-height:54px; display:flex; align-items:center; justify-content:center;
       user-select:none;
       font-weight:700;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
     }
     .mcard.revealed{ background:rgba(255,111,177,.14); border-color: rgba(255,111,177,.34); }
     .mcard.matched{ background:rgba(65,209,122,.16); border-color: rgba(65,209,122,.35); }
 
-    .question{
-      font-size:18px; margin:0 0 12px 0;
-    }
+    /* Game 2: Grammar */
+    .question{ font-size:18px; margin:0 0 12px 0; }
     .choices{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; }
     @media (max-width:520px){ .choices{ grid-template-columns:1fr; } }
-    .choice{
-      padding:12px; border-radius:14px; text-align:center;
-      font-weight:750;
-    }
+    .choice{ padding:12px; border-radius:14px; text-align:center; font-weight:750; }
 
+    /* Game 3: Word search */
     .ws-wrap{ display:flex; gap:14px; flex-wrap:wrap; }
     .ws-grid{
       display:grid; grid-template-columns:repeat(8, 34px); gap:6px;
@@ -128,6 +124,8 @@
       font-weight:700;
     }
     .ws-word.done{ background:rgba(65,209,122,.12); border-color: rgba(65,209,122,.30); }
+
+    /* Game 4: Compliment builder */
     .tokens{ display:flex; gap:8px; flex-wrap:wrap; margin:10px 0; }
     .token{
       padding:10px 12px; border-radius:999px;
@@ -143,6 +141,7 @@
       border:1px dashed rgba(255,255,255,.22);
       display:flex; align-items:center; gap:8px; flex-wrap:wrap;
     }
+
     canvas#confetti{
       position:fixed; inset:0; pointer-events:none; z-index:50;
     }
@@ -154,20 +153,23 @@
 <div class="app">
   <div class="topbar">
     <div class="brand">
-      <h1>Happy March 8th 💐</h1>
-      <p>Click on your name and complete the mini-game to unlock the greeting ✨</p>
+      <h1>Happy Women’s Day 💐</h1>
+      <p>Click your name and complete the mini-game to unlock your greeting ✨</p>
     </div>
-    <div class="pill" id="hintPill">Home screen</div>
+    <div class="pill" id="hintPill">Home</div>
   </div>
 
   <div class="card">
-
+    <!-- HOME -->
     <section id="home">
-      <h2 class="title">Choose yourself</h2>
-      <p class="subtitle">Each button leads to a personal game and a surprise.</p>
-
+      <h2 class="title">Choose your name</h2>
+      <p class="subtitle">Each button leads to a personal mini-game and a surprise.</p>
       <div class="grid cols2" id="nameButtons"></div>
+      <div class="hr"></div>
+      <p class="small">Tip: change names and greetings in the <span class="badge"><span>TEACHERS</span></span> array inside the script.</p>
+    </section>
 
+    <!-- TEACHER -->
     <section id="teacherPage" class="hidden">
       <div class="row" style="justify-content:space-between;">
         <div>
@@ -175,8 +177,8 @@
           <p class="subtitle" id="teacherIntro">—</p>
         </div>
         <div class="row">
-          <span class="badge">Check:<span class="score" id="scoreLabel">0</span></span>
-          <button class="btn-accent" id="btnHomeTop">To the main page</button>
+          <span class="badge">Score: <span class="score" id="scoreLabel">0</span></span>
+          <button class="btn-accent" id="btnHomeTop">Back to Home</button>
         </div>
       </div>
 
@@ -186,33 +188,35 @@
       <div class="row" style="justify-content:space-between;">
         <p class="small" id="gameTip">—</p>
         <div class="row">
-          <button id="btnReset">Again</button>
-          <button class="btn-ok hidden" id="btnWin">Open congratulations 💝</button>
+          <button id="btnReset">Restart</button>
+          <button class="btn-ok hidden" id="btnWin">Open greeting 💝</button>
         </div>
       </div>
     </section>
+
+    <!-- WIN -->
     <section id="winPage" class="hidden center">
       <div class="big" id="winBig">🎉</div>
-      <h2 class="title" id="winTitle">Congratulation</h2>
+      <h2 class="title" id="winTitle">Greeting</h2>
       <p class="subtitle" id="winText">—</p>
       <div class="row" style="justify-content:center; margin-top:10px;">
-        <button class="btn-accent" id="btnBackToHome">To the main page</button>
+        <button class="btn-accent" id="btnBackToHome">Back to Home</button>
       </div>
-      <p class="small" style="margin-top:14px;">P.S. You can play other teachers' games too 😉</p>
+      <p class="small" style="margin-top:14px;">P.S. You can also play other teachers’ games 😉</p>
     </section>
-
   </div>
 </div>
 
 <script>
+/* ===== EDIT HERE ===== */
 const TEACHERS = [
-  { id: "t1", name: "Anna",   intro: "Hi, Anna! Your mini-challenge is to find pairs of words 💐", win: "Anna, may this spring bring more joy, lightness, and inspiration. Thank you for your warmth and energy! 💖" },
-  { id: "t2", name: "Olesya",  intro: "Hi, Olesya! Catch the grammar balls 🎈",       win: "Olesya, I wish you bright emotions, bold goals, and pleasant surprises every day! 🌷" },
-  { id: "t3", name: "Sonya",  intro: "Hi, Sonya! Find the hidden words in the grid 🔎",    win: "Sonya, may your students bring you joy with their progress and may life bring you beautiful moments. Happy March 8th! 🌸" },
-  { id: "t4", name: "Anastasia", intro: "Hi, Anastasia! Piece together the compliment ✨", win: "Anastasia, may you always be surrounded by care, support, and love. Thank you for making the world a better place! 💐" },
+  { id: "t1", name: "Anna",   intro: "Hi Anna! Find all matching pairs to unlock your message 💐", win: "Anna, wishing you a bright spring full of joy, inspiration, and warm moments. Happy Women’s Day! 💖" },
+  { id: "t2", name: "Olesya", intro: "Hi Olesya! Choose the correct grammar option 🎈",            win: "Olesya, may your days be filled with smiles, energy, and lovely surprises. Happy Women’s Day! 🌷" },
+  { id: "t3", name: "Sonya",  intro: "Hi Sonya! Find the hidden words in the grid 🔎",            win: "Sonya, thank you for your kindness and dedication. Wishing you happiness and beautiful moments! 🌸" },
+  { id: "t4", name: "Anastasia", intro: "Hi Anastasia! Build a compliment from words ✨",          win: "Anastasia, may you always be surrounded by care, support, and love. Happy Women’s Day! 💐" },
 ];
-<script>
-/* ===== FIXED ROUTER / NAV ===== */
+
+/* ===== ROUTER / UI ===== */
 const el = (id) => document.getElementById(id);
 
 const home = el("home");
@@ -238,7 +242,7 @@ function show(view){
   home.classList.toggle("hidden", view !== "home");
   teacherPage.classList.toggle("hidden", view !== "teacher");
   winPage.classList.toggle("hidden", view !== "win");
-  hintPill.textContent = view === "home" ? "Home screen" : view === "teacher" ? "Game" : "Greeting";
+  hintPill.textContent = view === "home" ? "Home" : view === "teacher" ? "Game" : "Greeting";
 }
 
 function goHome(){
@@ -293,21 +297,9 @@ btnReset.onclick = () => currentGame?.reset?.();
 function setScore(n){ scoreLabel.textContent = String(n); }
 function unlockWin(){ btnWin.classList.remove("hidden"); fireConfetti(40); }
 
-renderHome();
-show("home");
-</script>
-btnHomeTop.onclick = goHome;
-btnBackToHome.onclick = goHome;
-btnWin.onclick = goWin;
-btnReset.onclick = () => currentGame?.reset?.();
-function setScore(n){ scoreLabel.textContent = String(n); }
-function unlockWin(){
-  btnWin.classList.remove("hidden");
-  fireConfetti(40);
-}
-
+/* ===== GAME 1: MEMORY ===== */
 function mountMemoryGame(t){
-  gameTip.textContent = "Game: Open all pairs (EN ↔ UA).";
+  gameTip.textContent = "Game: reveal and match all pairs (EN ↔ UA).";
 
   const words = [
     ["spring","весна"],
@@ -315,14 +307,14 @@ function mountMemoryGame(t){
     ["smile","посмішка"],
     ["joy","радість"],
     ["love","кохання"],
-    ["Pneumonoultramicroscopicsilicovolcanoconiosis","ЦЕ ШО ТАКЕ, а це найскладніше слово, переклад напишете в чат sunrise"],
+    ["kindness","доброта"],
   ];
+
   const deck = [];
   words.forEach((p, i) => {
-    deck.push({ key: "en"+i, pair:i, text:p[0] });
-    deck.push({ key: "ru"+i, pair:i, text:p[1] });
+    deck.push({ pair:i, text:p[0] });
+    deck.push({ pair:i, text:p[1] });
   });
-
   shuffle(deck);
 
   let first = null;
@@ -333,8 +325,8 @@ function mountMemoryGame(t){
   const wrap = document.createElement("div");
   wrap.innerHTML = `
     <div class="row" style="justify-content:space-between; margin-bottom:10px;">
-      <span class="badge">Couples:<span class="score" id="pairsDone">0</span> / ${words.length}</span>
-      <span class="badge">Moves:<span class="score" id="moves">0</span></span>
+      <span class="badge">Pairs: <span class="score" id="pairsDone">0</span> / ${words.length}</span>
+      <span class="badge">Moves: <span class="score" id="moves">0</span></span>
     </div>
     <div class="memory" id="memGrid"></div>
   `;
@@ -348,7 +340,6 @@ function mountMemoryGame(t){
     const c = document.createElement("div");
     c.className = "mcard";
     c.textContent = "❀";
-    c.dataset.idx = idx;
     c.onclick = () => flip(idx, c);
     memGrid.appendChild(c);
   });
@@ -373,18 +364,18 @@ function mountMemoryGame(t){
     if (first.card.pair === card.pair && first.idx !== idx){
       card.matched = true;
       first.card.matched = true;
+
       node.classList.remove("revealed");
       first.node.classList.remove("revealed");
       node.classList.add("matched");
       first.node.classList.add("matched");
+
       matched++;
       pairsDone.textContent = String(matched);
       setScore(matched);
       first = null;
 
-      if (matched === words.length){
-        unlockWin();
-      }
+      if (matched === words.length) unlockWin();
     } else {
       lock = true;
       setTimeout(() => {
@@ -400,18 +391,13 @@ function mountMemoryGame(t){
     }
   }
 
-  function reset(){
-    stopConfetti();
-    goTeacher(t);
-  }
-
-  function destroy(){ /* nothing */ }
-
-  return { reset, destroy };
+  function reset(){ goTeacher(t); }
+  return { reset };
 }
 
+/* ===== GAME 2: GRAMMAR ===== */
 function mountGrammarGame(t){
-  gameTip.textContent = "Game: Choose the correct answer. 7 questions – and win!";
+  gameTip.textContent = "Game: choose the correct answer. Score 5/7 to win!";
 
   const qs = [
     { q:"She ___ English every day.", a:"studies", opts:["study","studies","studying"] },
@@ -429,8 +415,8 @@ function mountGrammarGame(t){
   const wrap = document.createElement("div");
   wrap.innerHTML = `
     <div class="row" style="justify-content:space-between; margin-bottom:10px;">
-      <span class="badge">Question:<span class="score" id="qi">1</span> / ${qs.length}</span>
-      <span class="badge">Right: <span class="score" id="gs">0</span></span>
+      <span class="badge">Question: <span class="score" id="qi">1</span> / ${qs.length}</span>
+      <span class="badge">Correct: <span class="score" id="gs">0</span></span>
     </div>
     <p class="question" id="qtext"></p>
     <div class="choices" id="choices"></div>
@@ -470,7 +456,7 @@ function mountGrammarGame(t){
       setScore(score);
     } else {
       btn.classList.add("btn-bad");
-      feedback.textContent = `❌ Oops! Correct: ${qs[i].a}`;
+      feedback.textContent = `❌ Oops! Correct answer: ${qs[i].a}`;
     }
     [...choices.querySelectorAll("button")].forEach(x => x.disabled = true);
 
@@ -478,7 +464,7 @@ function mountGrammarGame(t){
       i++;
       if (i >= qs.length){
         if (score >= 5) unlockWin();
-        else feedback.textContent = "Almost there! Click «Restart» and try again ✨";
+        else feedback.textContent = "Almost! Press Restart and try again ✨";
         return;
       }
       render();
@@ -487,18 +473,17 @@ function mountGrammarGame(t){
 
   function reset(){
     i = 0; score = 0;
-    render();
     btnWin.classList.add("hidden");
+    render();
   }
 
-  function destroy(){ /* nothing */ }
-
   render();
-  return { reset, destroy };
+  return { reset };
 }
 
+/* ===== GAME 3: WORD SEARCH (click letters to build a word) ===== */
 function mountWordSearchGame(t){
-  gameTip.textContent = "Game: Click letters to form a word. Click «Check.»";
+  gameTip.textContent = "Game: click letters to build a word, then press Check.";
 
   const targetWords = ["MARCH","FLOWER","JOY","SMILE"];
   const size = 8;
@@ -521,8 +506,8 @@ function mountWordSearchGame(t){
   const wrap = document.createElement("div");
   wrap.innerHTML = `
     <div class="row" style="justify-content:space-between; margin-bottom:10px;">
-      <span class="badge">Found:<span class="score" id="fd">0</span> / ${targetWords.length}</span>
-      <span class="badge">Word:<span class="score" id="cur">—</span></span>
+      <span class="badge">Found: <span class="score" id="fd">0</span> / ${targetWords.length}</span>
+      <span class="badge">Word: <span class="score" id="cur">—</span></span>
     </div>
     <div class="ws-wrap">
       <div>
@@ -545,7 +530,7 @@ function mountWordSearchGame(t){
   const wsMsg = wrap.querySelector("#wsMsg");
 
   function renderList(){
-    wsList.innerHTML = `<p class="small" style="margin:0 0 10px 0;">Need to find:</p>`;
+    wsList.innerHTML = `<p class="small" style="margin:0 0 10px 0;">Words to find:</p>`;
     targetWords.forEach(w => {
       const item = document.createElement("div");
       item.className = "ws-word" + (found.has(w) ? " done" : "");
@@ -561,7 +546,6 @@ function mountWordSearchGame(t){
         const cell = document.createElement("div");
         cell.className = "ws-cell";
         cell.textContent = gridRows[r][c];
-        cell.dataset.r = r; cell.dataset.c = c;
         cell.onclick = () => {
           cell.classList.add("active");
           current += cell.textContent;
@@ -598,10 +582,10 @@ function mountWordSearchGame(t){
       cur.textContent = "—";
       if (found.size === targetWords.length) unlockWin();
     } else if (found.has(w)) {
-      wsMsg.textContent = "⚠️ This word has already been found.";
+      wsMsg.textContent = "⚠️ You already found that word.";
       clearSelection();
     } else {
-      wsMsg.textContent = "❌ Doesn't seem like the right word. Try again!";
+      wsMsg.textContent = "❌ Not a target word. Try again!";
       clearSelection();
     }
   };
@@ -617,29 +601,31 @@ function mountWordSearchGame(t){
     clearSelection();
   }
 
-  function destroy(){ /* nothing */ }
-
   renderGrid();
   renderList();
-  return { reset, destroy };
+  return { reset };
 }
-function mountComplimentGame(t){
-  gameTip.textContent = "Game: Collect a compliment by clicking on the words (in the correct order).";
 
-  const target = ["You", "are", "truly", "inspiring", "today!"];
-  const pool = shuffle([...target, "always", "so", "kind", "wow!"]);
+/* ===== GAME 4: COMPLIMENT BUILDER ===== */
+function mountComplimentGame(t){
+  gameTip.textContent = "Game: build the compliment by clicking the words in the correct order.";
+
+  const target = ["You","are","truly","inspiring","today!"];
+  const pool = shuffle([...target, "always", "so", "kind", "amazing!"]);
 
   let built = [];
   let score = 0;
 
   const wrap = document.createElement("div");
   wrap.innerHTML = `
-    <p class="small" style="margin:0 0 8px 0;">Goal: to assemble a phrase<span class="badge"><span>${target.join(" ")}</span></span></p>
+    <p class="small" style="margin:0 0 8px 0;">
+      Goal: <span class="badge"><span>${target.join(" ")}</span></span>
+    </p>
     <div class="sentence" id="sentence"></div>
     <div class="row" style="margin-top:10px;">
-      <button id="undoBtn">Cancel</button>
+      <button id="undoBtn">Undo</button>
       <button class="btn-accent" id="checkBtn2">Check</button>
-      <span class="badge">Collected:<span class="score" id="builtCount">0</span> / ${target.length}</span>
+      <span class="badge">Built: <span class="score" id="builtCount">0</span> / ${target.length}</span>
     </div>
     <div class="tokens" id="tokens"></div>
     <p class="small" id="msg2"></p>
@@ -652,12 +638,12 @@ function mountComplimentGame(t){
   const builtCount = wrap.querySelector("#builtCount");
 
   function render(){
-    sentence.innerHTML = built.length ? "" : "<span class='muted'>Click on the words below...</span>";
+    sentence.innerHTML = built.length ? "" : "<span class='muted'>Click words below…</span>";
     built.forEach(w => {
-      const t = document.createElement("span");
-      t.className = "token";
-      t.textContent = w;
-      sentence.appendChild(t);
+      const s = document.createElement("span");
+      s.className = "token";
+      s.textContent = w;
+      sentence.appendChild(s);
     });
 
     tokens.innerHTML = "";
@@ -695,7 +681,7 @@ function mountComplimentGame(t){
       unlockWin();
       tokens.querySelectorAll("button").forEach(b => b.disabled = true);
     } else {
-      msg2.textContent = "❌ Almost there! Try a different order 🙂";
+      msg2.textContent = "❌ Almost! Try a different order 🙂";
     }
   };
 
@@ -703,17 +689,18 @@ function mountComplimentGame(t){
     built = [];
     score = 0;
     btnWin.classList.add("hidden");
-    while (pool.length) pool.pop();
-    shuffle([...target, "always", "so", "kind", "wow!"]).forEach(x => pool.push(x));
+    // reshuffle
+    const fresh = shuffle([...target, "always", "so", "kind", "amazing!"]);
+    pool.length = 0;
+    fresh.forEach(x => pool.push(x));
     render();
   }
 
-  function destroy(){ /* nothing */ }
-
   render();
-  return { reset, destroy };
+  return { reset };
 }
 
+/* ===== UTILS ===== */
 function shuffle(arr){
   for (let i = arr.length - 1; i > 0; i--){
     const j = Math.floor(Math.random() * (i + 1));
@@ -721,6 +708,8 @@ function shuffle(arr){
   }
   return arr;
 }
+
+/* ===== CONFETTI ===== */
 const confettiCanvas = document.getElementById("confetti");
 const ctx = confettiCanvas.getContext("2d");
 let confettiPieces = [];
@@ -754,7 +743,7 @@ function fireConfetti(count=80){
 
 function tickConfetti(){
   ctx.clearRect(0,0, window.innerWidth, window.innerHeight);
-  const w = window.innerWidth, h = window.innerHeight;
+  const h = window.innerHeight;
 
   confettiPieces.forEach(p => {
     p.x += p.vx;
@@ -772,12 +761,8 @@ function tickConfetti(){
   });
 
   confettiPieces = confettiPieces.filter(p => p.life > 0 && p.y < h + 60);
-
-  if (confettiPieces.length > 0){
-    confettiTimer = requestAnimationFrame(tickConfetti);
-  } else {
-    confettiTimer = null;
-  }
+  if (confettiPieces.length > 0) confettiTimer = requestAnimationFrame(tickConfetti);
+  else confettiTimer = null;
 }
 
 function stopConfetti(){
@@ -788,10 +773,10 @@ function stopConfetti(){
   }
   ctx.clearRect(0,0, window.innerWidth, window.innerHeight);
 }
+
+/* INIT */
+renderHome();
 show("home");
 </script>
 </body>
-
 </html>
-
-
