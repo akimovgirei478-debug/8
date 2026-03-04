@@ -168,10 +168,6 @@
 
       <div class="grid cols2" id="nameButtons"></div>
 
-      <div class="hr"></div>
-      <p class="small">Hint: names can be changed in the array<span class="badge"><span>TEACHERS</span></span> прямо внизу кода.</p>
-    </section>
-
     <section id="teacherPage" class="hidden">
       <div class="row" style="justify-content:space-between;">
         <div>
@@ -211,9 +207,9 @@
 <script>
 const TEACHERS = [
   { id: "t1", name: "Anna",   intro: "Hi, Anna! Your mini-challenge is to find pairs of words 💐", win: "Anna, may this spring bring more joy, lightness, and inspiration. Thank you for your warmth and energy! 💖" },
-  { id: "t2", name: "Ольга",  intro: "Hi, Olesya! Catch the grammar balls 🎈",       win: "Olesya, I wish you bright emotions, bold goals, and pleasant surprises every day! 🌷" },
-  { id: "t3", name: "Мария",  intro: "Hi, Sonya! Find the hidden words in the grid 🔎",    win: "Sonya, may your students bring you joy with their progress and may life bring you beautiful moments. Happy March 8th! 🌸" },
-  { id: "t4", name: "Екатерина", intro: "Hi, Anastasia! Piece together the compliment ✨", win: "Anastasia, may you always be surrounded by care, support, and love. Thank you for making the world a better place! 💐" },
+  { id: "t2", name: "Olesya",  intro: "Hi, Olesya! Catch the grammar balls 🎈",       win: "Olesya, I wish you bright emotions, bold goals, and pleasant surprises every day! 🌷" },
+  { id: "t3", name: "Sonya",  intro: "Hi, Sonya! Find the hidden words in the grid 🔎",    win: "Sonya, may your students bring you joy with their progress and may life bring you beautiful moments. Happy March 8th! 🌸" },
+  { id: "t4", name: "Anastasia", intro: "Hi, Anastasia! Piece together the compliment ✨", win: "Anastasia, may you always be surrounded by care, support, and love. Thank you for making the world a better place! 💐" },
 ];
 const el = (id) => document.getElementById(id);
 
@@ -254,7 +250,7 @@ function goHome(){
 function goTeacher(t){
   stopConfetti();
   currentTeacher = t;
-  teacherTitle.textContent = `Преподаватель: ${t.name}`;
+  teacherTitle.textContent = `you${t.name}`;
   teacherIntro.textContent = t.intro;
   scoreLabel.textContent = "0";
   btnWin.classList.add("hidden");
@@ -324,8 +320,8 @@ function mountMemoryGame(t){
   const wrap = document.createElement("div");
   wrap.innerHTML = `
     <div class="row" style="justify-content:space-between; margin-bottom:10px;">
-      <span class="badge">Пары: <span class="score" id="pairsDone">0</span> / ${words.length}</span>
-      <span class="badge">Ходы: <span class="score" id="moves">0</span></span>
+      <span class="badge">Couples:<span class="score" id="pairsDone">0</span> / ${words.length}</span>
+      <span class="badge">Moves:<span class="score" id="moves">0</span></span>
     </div>
     <div class="memory" id="memGrid"></div>
   `;
@@ -784,3 +780,4 @@ show("home");
 </body>
 
 </html>
+
