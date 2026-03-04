@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>С 8 Марта 💐</title>
+  <title> with 8 march💐</title>
   <style>
     :root { --bg:#0b1020; --card:#131a33; --text:#eef2ff; --muted:#a9b0d6; --accent:#ff6fb1; --ok:#41d17a; --bad:#ff4d6d; }
     *{ box-sizing:border-box; }
@@ -78,7 +78,6 @@
       letter-spacing:.2px;
     }
 
-    /* Game 1: Memory */
     .memory{ display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:10px; }
     @media (max-width:520px){ .memory{ grid-template-columns:repeat(3, minmax(0, 1fr)); } }
     .mcard{
@@ -92,7 +91,6 @@
     .mcard.revealed{ background:rgba(255,111,177,.14); border-color: rgba(255,111,177,.34); }
     .mcard.matched{ background:rgba(65,209,122,.16); border-color: rgba(65,209,122,.35); }
 
-    /* Game 2: Grammar bubbles */
     .question{
       font-size:18px; margin:0 0 12px 0;
     }
@@ -103,7 +101,6 @@
       font-weight:750;
     }
 
-    /* Game 3: Word search */
     .ws-wrap{ display:flex; gap:14px; flex-wrap:wrap; }
     .ws-grid{
       display:grid; grid-template-columns:repeat(8, 34px); gap:6px;
@@ -131,8 +128,6 @@
       font-weight:700;
     }
     .ws-word.done{ background:rgba(65,209,122,.12); border-color: rgba(65,209,122,.30); }
-
-    /* Game 4: Compliment builder */
     .tokens{ display:flex; gap:8px; flex-wrap:wrap; margin:10px 0; }
     .token{
       padding:10px 12px; border-radius:999px;
@@ -148,8 +143,6 @@
       border:1px dashed rgba(255,255,255,.22);
       display:flex; align-items:center; gap:8px; flex-wrap:wrap;
     }
-
-    /* Confetti canvas */
     canvas#confetti{
       position:fixed; inset:0; pointer-events:none; z-index:50;
     }
@@ -161,26 +154,24 @@
 <div class="app">
   <div class="topbar">
     <div class="brand">
-      <h1>С 8 Марта 💐</h1>
-      <p>Нажми на своё имя и пройди мини-игру, чтобы открыть поздравление ✨</p>
+      <h1>Happy March 8th 💐</h1>
+      <p>Click on your name and complete the mini-game to unlock the greeting ✨</p>
     </div>
-    <div class="pill" id="hintPill">Главный экран</div>
+    <div class="pill" id="hintPill">Home screen</div>
   </div>
 
   <div class="card">
 
-    <!-- HOME -->
     <section id="home">
-      <h2 class="title">Выберите преподавателя</h2>
-      <p class="subtitle">Каждая кнопка ведёт к персональной игре и сюрпризу.</p>
+      <h2 class="title">Choose yourself</h2>
+      <p class="subtitle">Each button leads to a personal game and a surprise.</p>
 
       <div class="grid cols2" id="nameButtons"></div>
 
       <div class="hr"></div>
-      <p class="small">Подсказка: имена можно поменять в массиве <span class="badge"><span>TEACHERS</span></span> прямо внизу кода.</p>
+      <p class="small">Hint: names can be changed in the array<span class="badge"><span>TEACHERS</span></span> прямо внизу кода.</p>
     </section>
 
-    <!-- TEACHER PAGES -->
     <section id="teacherPage" class="hidden">
       <div class="row" style="justify-content:space-between;">
         <div>
@@ -188,52 +179,42 @@
           <p class="subtitle" id="teacherIntro">—</p>
         </div>
         <div class="row">
-          <span class="badge">Счёт: <span class="score" id="scoreLabel">0</span></span>
-          <button class="btn-accent" id="btnHomeTop">На главный</button>
+          <span class="badge">Check:<span class="score" id="scoreLabel">0</span></span>
+          <button class="btn-accent" id="btnHomeTop">To the main page</button>
         </div>
       </div>
 
-      <!-- Game mounts here -->
       <div id="gameMount"></div>
 
       <div class="hr"></div>
       <div class="row" style="justify-content:space-between;">
         <p class="small" id="gameTip">—</p>
         <div class="row">
-          <button id="btnReset">Заново</button>
-          <button class="btn-ok hidden" id="btnWin">Открыть поздравление 💝</button>
+          <button id="btnReset">Again</button>
+          <button class="btn-ok hidden" id="btnWin">Open congratulations 💝</button>
         </div>
       </div>
     </section>
-
-    <!-- WIN -->
     <section id="winPage" class="hidden center">
       <div class="big" id="winBig">🎉</div>
-      <h2 class="title" id="winTitle">Поздравление</h2>
+      <h2 class="title" id="winTitle">Congratulation</h2>
       <p class="subtitle" id="winText">—</p>
       <div class="row" style="justify-content:center; margin-top:10px;">
-        <button class="btn-accent" id="btnBackToHome">На главный</button>
+        <button class="btn-accent" id="btnBackToHome">To the main page</button>
       </div>
-      <p class="small" style="margin-top:14px;">P.S. Можно проходить игры других преподавателей тоже 😉</p>
+      <p class="small" style="margin-top:14px;">P.S. You can play other teachers' games too 😉</p>
     </section>
 
   </div>
 </div>
 
 <script>
-/** =========================
- *  EDIT HERE: Teachers list
- *  ========================= */
 const TEACHERS = [
-  { id: "t1", name: "Анна",   intro: "Hi, Анна! Твой мини-челлендж — найти пары слов 💐", win: "Анна, пусть этой весной будет больше радости, лёгкости и вдохновения. Спасибо за твоё тепло и энергию! 💖" },
-  { id: "t2", name: "Ольга",  intro: "Hi, Ольга! Лови грамматические шарики 🎈",       win: "Ольга, желаю ярких эмоций, смелых целей и приятных сюрпризов каждый день! 🌷" },
-  { id: "t3", name: "Мария",  intro: "Hi, Мария! Найди спрятанные слова в сетке 🔎",    win: "Мария, пусть ученики радуют прогрессом, а жизнь — красивыми моментами. С 8 Марта! 🌸" },
-  { id: "t4", name: "Екатерина", intro: "Hi, Екатерина! Собери комплимент по кусочкам ✨", win: "Екатерина, пусть рядом будут забота, поддержка и любовь. Спасибо, что делаешь мир добрее! 💐" },
+  { id: "t1", name: "Anna",   intro: "Hi, Anna! Your mini-challenge is to find pairs of words 💐", win: "Anna, may this spring bring more joy, lightness, and inspiration. Thank you for your warmth and energy! 💖" },
+  { id: "t2", name: "Ольга",  intro: "Hi, Olesya! Catch the grammar balls 🎈",       win: "Olesya, I wish you bright emotions, bold goals, and pleasant surprises every day! 🌷" },
+  { id: "t3", name: "Мария",  intro: "Hi, Sonya! Find the hidden words in the grid 🔎",    win: "Sonya, may your students bring you joy with their progress and may life bring you beautiful moments. Happy March 8th! 🌸" },
+  { id: "t4", name: "Екатерина", intro: "Hi, Anastasia! Piece together the compliment ✨", win: "Anastasia, may you always be surrounded by care, support, and love. Thank you for making the world a better place! 💐" },
 ];
-
-/** =========================
- *  Simple router
- *  ========================= */
 const el = (id) => document.getElementById(id);
 
 const home = el("home");
@@ -259,7 +240,7 @@ function show(view){
   home.classList.toggle("hidden", view !== "home");
   teacherPage.classList.toggle("hidden", view !== "teacher");
   winPage.classList.toggle("hidden", view !== "win");
-  hintPill.textContent = view === "home" ? "Главный экран" : view === "teacher" ? "Игра" : "Поздравление";
+  hintPill.textContent = view === "home" ? "Home screen" : view === "teacher" ? "Game" : "Congratulation";
 }
 
 function goHome(){
@@ -279,8 +260,6 @@ function goTeacher(t){
   btnWin.classList.add("hidden");
   gameMount.innerHTML = "";
   show("teacher");
-
-  // Mount a specific game per teacher index
   const idx = TEACHERS.findIndex(x => x.id === t.id);
   if (idx === 0) currentGame = mountMemoryGame(t);
   if (idx === 1) currentGame = mountGrammarGame(t);
@@ -291,14 +270,11 @@ function goTeacher(t){
 function goWin(){
   show("win");
   el("winBig").textContent = "🎉💐✨";
-  el("winTitle").textContent = `С 8 Марта, ${currentTeacher.name}!`;
+  el("winTitle").textContent = `Happy March 8th, ${currentTeacher.name}!`;
   el("winText").textContent = currentTeacher.win;
   fireConfetti(140);
 }
 
-/** =========================
- *  HOME buttons
- *  ========================= */
 function renderHome(){
   nameButtons.innerHTML = "";
   TEACHERS.forEach((t) => {
@@ -315,32 +291,23 @@ btnHomeTop.onclick = goHome;
 btnBackToHome.onclick = goHome;
 btnWin.onclick = goWin;
 btnReset.onclick = () => currentGame?.reset?.();
-
-/** =========================
- *  Helpers
- *  ========================= */
 function setScore(n){ scoreLabel.textContent = String(n); }
 function unlockWin(){
   btnWin.classList.remove("hidden");
   fireConfetti(40);
 }
 
-/** =========================
- *  GAME 1: Memory match
- *  ========================= */
 function mountMemoryGame(t){
-  gameTip.textContent = "Игра: открой все пары (EN ↔ RU).";
+  gameTip.textContent = "Game: Open all pairs (EN ↔ UA).";
 
   const words = [
     ["spring","весна"],
-    ["flower","цветок"],
-    ["smile","улыбка"],
-    ["joy","радость"],
-    ["love","любовь"],
-    ["shine","сиять"],
+    ["flower","квітка"],
+    ["smile","посмішка"],
+    ["joy","радість"],
+    ["love","кохання"],
+    ["Pneumonoultramicroscopicsilicovolcanoconiosis","ЦЕ ШО ТАКЕ, а це найскладніше слово, переклад напишете в чат sunrise"],
   ];
-
-  // Build deck: each pair gives two cards
   const deck = [];
   words.forEach((p, i) => {
     deck.push({ key: "en"+i, pair:i, text:p[0] });
@@ -395,7 +362,6 @@ function mountMemoryGame(t){
     movesEl.textContent = String(moves);
 
     if (first.card.pair === card.pair && first.idx !== idx){
-      // match
       card.matched = true;
       first.card.matched = true;
       node.classList.remove("revealed");
@@ -411,7 +377,6 @@ function mountMemoryGame(t){
         unlockWin();
       }
     } else {
-      // mismatch
       lock = true;
       setTimeout(() => {
         card.revealed = false;
@@ -428,7 +393,7 @@ function mountMemoryGame(t){
 
   function reset(){
     stopConfetti();
-    goTeacher(t); // simple remount
+    goTeacher(t);
   }
 
   function destroy(){ /* nothing */ }
@@ -436,11 +401,8 @@ function mountMemoryGame(t){
   return { reset, destroy };
 }
 
-/** =========================
- *  GAME 2: Grammar quiz
- *  ========================= */
 function mountGrammarGame(t){
-  gameTip.textContent = "Игра: выбери правильный вариант. 7 вопросов — и победа!";
+  gameTip.textContent = "Game: Choose the correct answer. 7 questions – and win!";
 
   const qs = [
     { q:"She ___ English every day.", a:"studies", opts:["study","studies","studying"] },
@@ -458,8 +420,8 @@ function mountGrammarGame(t){
   const wrap = document.createElement("div");
   wrap.innerHTML = `
     <div class="row" style="justify-content:space-between; margin-bottom:10px;">
-      <span class="badge">Вопрос: <span class="score" id="qi">1</span> / ${qs.length}</span>
-      <span class="badge">Правильно: <span class="score" id="gs">0</span></span>
+      <span class="badge">Question:<span class="score" id="qi">1</span> / ${qs.length}</span>
+      <span class="badge">Right: <span class="score" id="gs">0</span></span>
     </div>
     <p class="question" id="qtext"></p>
     <div class="choices" id="choices"></div>
@@ -501,15 +463,13 @@ function mountGrammarGame(t){
       btn.classList.add("btn-bad");
       feedback.textContent = `❌ Oops! Correct: ${qs[i].a}`;
     }
-    // disable all
     [...choices.querySelectorAll("button")].forEach(x => x.disabled = true);
 
     setTimeout(() => {
       i++;
       if (i >= qs.length){
-        // win if score >=5 (можно менять)
         if (score >= 5) unlockWin();
-        else feedback.textContent = "Почти! Нажми «Заново» и попробуй ещё раз ✨";
+        else feedback.textContent = "Almost there! Click «Restart» and try again ✨";
         return;
       }
       render();
@@ -528,16 +488,12 @@ function mountGrammarGame(t){
   return { reset, destroy };
 }
 
-/** =========================
- *  GAME 3: Word search (click letters to form a word)
- *  ========================= */
 function mountWordSearchGame(t){
-  gameTip.textContent = "Игра: кликай буквы, чтобы собрать слово. Нажми «Проверить».";
+  gameTip.textContent = "Game: Click letters to form a word. Click «Check.»";
 
   const targetWords = ["MARCH","FLOWER","JOY","SMILE"];
   const size = 8;
 
-  // Pre-baked grid with those words mostly present (simple, not perfect crossword)
   const gridRows = [
     "MARCHXQZ",
     "ABFLOWER",
@@ -556,15 +512,15 @@ function mountWordSearchGame(t){
   const wrap = document.createElement("div");
   wrap.innerHTML = `
     <div class="row" style="justify-content:space-between; margin-bottom:10px;">
-      <span class="badge">Найдено: <span class="score" id="fd">0</span> / ${targetWords.length}</span>
-      <span class="badge">Слово: <span class="score" id="cur">—</span></span>
+      <span class="badge">Found:<span class="score" id="fd">0</span> / ${targetWords.length}</span>
+      <span class="badge">Word:<span class="score" id="cur">—</span></span>
     </div>
     <div class="ws-wrap">
       <div>
         <div class="ws-grid" id="wsGrid"></div>
         <div class="row" style="margin-top:10px;">
-          <button class="btn-accent" id="checkBtn">Проверить</button>
-          <button id="clearBtn">Очистить</button>
+          <button class="btn-accent" id="checkBtn">Check</button>
+          <button id="clearBtn">Clear</button>
         </div>
         <p class="small" id="wsMsg"></p>
       </div>
@@ -580,7 +536,7 @@ function mountWordSearchGame(t){
   const wsMsg = wrap.querySelector("#wsMsg");
 
   function renderList(){
-    wsList.innerHTML = `<p class="small" style="margin:0 0 10px 0;">Нужно найти:</p>`;
+    wsList.innerHTML = `<p class="small" style="margin:0 0 10px 0;">Need to find:</p>`;
     targetWords.forEach(w => {
       const item = document.createElement("div");
       item.className = "ws-word" + (found.has(w) ? " done" : "");
@@ -624,7 +580,6 @@ function mountWordSearchGame(t){
       fd.textContent = String(found.size);
       setScore(score);
       wsMsg.textContent = `✅ Found: ${w}!`;
-      // mark selected as found
       wsGrid.querySelectorAll(".ws-cell.active").forEach(x => {
         x.classList.remove("active");
         x.classList.add("found");
@@ -634,10 +589,10 @@ function mountWordSearchGame(t){
       cur.textContent = "—";
       if (found.size === targetWords.length) unlockWin();
     } else if (found.has(w)) {
-      wsMsg.textContent = "⚠️ Это слово уже найдено.";
+      wsMsg.textContent = "⚠️ This word has already been found.";
       clearSelection();
     } else {
-      wsMsg.textContent = "❌ Не похоже на нужное слово. Попробуй снова!";
+      wsMsg.textContent = "❌ Doesn't seem like the right word. Try again!";
       clearSelection();
     }
   };
@@ -659,12 +614,8 @@ function mountWordSearchGame(t){
   renderList();
   return { reset, destroy };
 }
-
-/** =========================
- *  GAME 4: Compliment builder
- *  ========================= */
 function mountComplimentGame(t){
-  gameTip.textContent = "Игра: собери комплимент кликами по словам (в правильном порядке).";
+  gameTip.textContent = "Game: Collect a compliment by clicking on the words (in the correct order).";
 
   const target = ["You", "are", "truly", "inspiring", "today!"];
   const pool = shuffle([...target, "always", "so", "kind", "wow!"]);
@@ -674,12 +625,12 @@ function mountComplimentGame(t){
 
   const wrap = document.createElement("div");
   wrap.innerHTML = `
-    <p class="small" style="margin:0 0 8px 0;">Цель: собрать фразу <span class="badge"><span>${target.join(" ")}</span></span></p>
+    <p class="small" style="margin:0 0 8px 0;">Goal: to assemble a phrase<span class="badge"><span>${target.join(" ")}</span></span></p>
     <div class="sentence" id="sentence"></div>
     <div class="row" style="margin-top:10px;">
-      <button id="undoBtn">Отменить</button>
-      <button class="btn-accent" id="checkBtn2">Проверить</button>
-      <span class="badge">Собрано: <span class="score" id="builtCount">0</span> / ${target.length}</span>
+      <button id="undoBtn">Cancel</button>
+      <button class="btn-accent" id="checkBtn2">Check</button>
+      <span class="badge">Collected:<span class="score" id="builtCount">0</span> / ${target.length}</span>
     </div>
     <div class="tokens" id="tokens"></div>
     <p class="small" id="msg2"></p>
@@ -692,7 +643,7 @@ function mountComplimentGame(t){
   const builtCount = wrap.querySelector("#builtCount");
 
   function render(){
-    sentence.innerHTML = built.length ? "" : "<span class='muted'>Нажимай слова снизу…</span>";
+    sentence.innerHTML = built.length ? "" : "<span class='muted'>Click on the words below...</span>";
     built.forEach(w => {
       const t = document.createElement("span");
       t.className = "token";
@@ -733,10 +684,9 @@ function mountComplimentGame(t){
       score = 1;
       setScore(score);
       unlockWin();
-      // disable
       tokens.querySelectorAll("button").forEach(b => b.disabled = true);
     } else {
-      msg2.textContent = "❌ Почти! Попробуй другой порядок 🙂";
+      msg2.textContent = "❌ Almost there! Try a different order 🙂";
     }
   };
 
@@ -744,7 +694,6 @@ function mountComplimentGame(t){
     built = [];
     score = 0;
     btnWin.classList.add("hidden");
-    // re-shuffle pool for fun
     while (pool.length) pool.pop();
     shuffle([...target, "always", "so", "kind", "wow!"]).forEach(x => pool.push(x));
     render();
@@ -756,9 +705,6 @@ function mountComplimentGame(t){
   return { reset, destroy };
 }
 
-/** =========================
- *  Utils: shuffle
- *  ========================= */
 function shuffle(arr){
   for (let i = arr.length - 1; i > 0; i--){
     const j = Math.floor(Math.random() * (i + 1));
@@ -766,10 +712,6 @@ function shuffle(arr){
   }
   return arr;
 }
-
-/** =========================
- *  Confetti (tiny built-in)
- *  ========================= */
 const confettiCanvas = document.getElementById("confetti");
 const ctx = confettiCanvas.getContext("2d");
 let confettiPieces = [];
@@ -795,7 +737,7 @@ function fireConfetti(count=80){
       rot: Math.random()*Math.PI,
       vr: -0.15 + Math.random()*0.3,
       life: 120 + Math.random()*80,
-      hue: 320 + Math.random()*80, // pink-ish range (not critical)
+      hue: 320 + Math.random()*80,
     });
   }
   if (!confettiTimer) confettiTimer = requestAnimationFrame(tickConfetti);
@@ -837,9 +779,8 @@ function stopConfetti(){
   }
   ctx.clearRect(0,0, window.innerWidth, window.innerHeight);
 }
-
-/** Start on home */
 show("home");
 </script>
 </body>
+
 </html>
