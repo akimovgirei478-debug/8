@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -211,6 +211,8 @@ const TEACHERS = [
   { id: "t3", name: "Sonya",  intro: "Hi, Sonya! Find the hidden words in the grid 🔎",    win: "Sonya, may your students bring you joy with their progress and may life bring you beautiful moments. Happy March 8th! 🌸" },
   { id: "t4", name: "Anastasia", intro: "Hi, Anastasia! Piece together the compliment ✨", win: "Anastasia, may you always be surrounded by care, support, and love. Thank you for making the world a better place! 💐" },
 ];
+<script>
+/* ===== FIXED ROUTER / NAV ===== */
 const el = (id) => document.getElementById(id);
 
 const home = el("home");
@@ -236,7 +238,7 @@ function show(view){
   home.classList.toggle("hidden", view !== "home");
   teacherPage.classList.toggle("hidden", view !== "teacher");
   winPage.classList.toggle("hidden", view !== "win");
-  hintPill.textContent = view === "home" ? "Home screen" : view === "teacher" ? "Game" : "Congratulation";
+  hintPill.textContent = view === "home" ? "Home screen" : view === "teacher" ? "Game" : "Greeting";
 }
 
 function goHome(){
@@ -250,12 +252,13 @@ function goHome(){
 function goTeacher(t){
   stopConfetti();
   currentTeacher = t;
-  teacherTitle.textContent = `you${t.name}`;
+  teacherTitle.textContent = `Teacher: ${t.name}`;
   teacherIntro.textContent = t.intro;
   scoreLabel.textContent = "0";
   btnWin.classList.add("hidden");
   gameMount.innerHTML = "";
   show("teacher");
+
   const idx = TEACHERS.findIndex(x => x.id === t.id);
   if (idx === 0) currentGame = mountMemoryGame(t);
   if (idx === 1) currentGame = mountGrammarGame(t);
@@ -266,7 +269,7 @@ function goTeacher(t){
 function goWin(){
   show("win");
   el("winBig").textContent = "🎉💐✨";
-  el("winTitle").textContent = `Happy March 8th, ${currentTeacher.name}!`;
+  el("winTitle").textContent = `Happy Women’s Day, ${currentTeacher.name}!`;
   el("winText").textContent = currentTeacher.win;
   fireConfetti(140);
 }
@@ -281,8 +284,18 @@ function renderHome(){
     nameButtons.appendChild(b);
   });
 }
-renderHome();
 
+btnHomeTop.onclick = goHome;
+btnBackToHome.onclick = goHome;
+btnWin.onclick = goWin;
+btnReset.onclick = () => currentGame?.reset?.();
+
+function setScore(n){ scoreLabel.textContent = String(n); }
+function unlockWin(){ btnWin.classList.remove("hidden"); fireConfetti(40); }
+
+renderHome();
+show("home");
+</script>
 btnHomeTop.onclick = goHome;
 btnBackToHome.onclick = goHome;
 btnWin.onclick = goWin;
@@ -780,4 +793,5 @@ show("home");
 </body>
 
 </html>
+
 
