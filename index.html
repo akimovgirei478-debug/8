@@ -16,23 +16,22 @@
 
   *{ box-sizing:border-box; }
 
-  body{
-    margin:0;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    color:var(--text);
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:24px;
-    overflow-x:hidden;
-    background:
-      radial-gradient(900px 500px at 10% 0%, rgba(255,210,232,.95) 0%, transparent 60%),
-      radial-gradient(800px 500px at 90% 10%, rgba(221,203,255,.90) 0%, transparent 55%),
-      radial-gradient(700px 500px at 50% 100%, rgba(255,238,214,.90) 0%, transparent 60%),
-      linear-gradient(180deg, #fffefe 0%, #fff6fb 46%, #fffbf7 100%);
-    position:relative;
-  }
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+
+  background:
+    radial-gradient(900px 500px at 10% 0%, rgba(255,200,230,0.9) 0%, transparent 60%),
+    radial-gradient(800px 500px at 90% 10%, rgba(210,190,255,0.9) 0%, transparent 55%),
+    radial-gradient(700px 500px at 50% 100%, rgba(255,235,210,0.9) 0%, transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, #fff5fa 45%, #fffaf2 100%);
+}
 
   body::before,
   body::after{
@@ -105,14 +104,22 @@
       0 8px 22px rgba(255,255,255,.05);
   }
 
-  .card{
-  background: rgba(255, 255, 255, 0.85) !important;
-  border: 3px solid red !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  box-shadow: none !important;
-  border-radius: 30px !important;
-  padding: 20px !important;
+.card{
+  position:relative;
+  overflow:hidden;
+  border-radius:28px;
+  padding:20px;
+
+  background: rgba(255,255,255,0.25);
+
+  border:1px solid rgba(255,255,255,0.45);
+
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+
+  box-shadow:
+    0 25px 60px rgba(180,120,160,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.5);
 }
   .card::before{
     content:"";
@@ -167,19 +174,23 @@
       0 8px 22px rgba(255,255,255,.04);
   }
 
-  button{
-    cursor:pointer;
-    padding:12px 14px;
-    transition: transform .08s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
-  }
+button{
+  cursor:pointer;
+  padding:12px 14px;
 
-  button:hover{
-    background:rgba(255,255,255,.30);
-    border-color:rgba(255,255,255,.52);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.48),
-      0 12px 28px rgba(255,120,178,.08);
-  }
+  background: rgba(255,255,255,0.25);
+  border:1px solid rgba(255,255,255,0.4);
+  border-radius:18px;
+
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+  transition: all .2s ease;
+}
+
+button:hover{
+  background: rgba(255,255,255,0.35);
+}}
 
   button:active{
     transform:translateY(1px);
@@ -1653,6 +1664,7 @@ show("home");
 </script>
 </body>
 </html>
+
 
 
 
