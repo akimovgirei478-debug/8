@@ -920,15 +920,21 @@ function mountComplimentGame(t){
   gameTip.textContent = "Game: build BOTH compliments in the correct order.";
 
   const targets = [
-    ["Сьогодні","ти","справді","надихаєш","нас","!"],
-    ["Твоя","доброта","робить","день","кращим","!"]
+    {
+      prompt: ["Сьогодні","ти","справді","надихаєш","нас","!"],
+      answer: ["Today","you","really","inspire","us","!"]
+    },
+    {
+      prompt: ["Твоя","доброта","робить","день","кращим","!"],
+      answer: ["Your","kindness","makes","the","day","better","!"]
+    }
   ];
 
   const extras = ["always","so","kind","amazing","bright","happy"];
   let stage = 0;
   let built = [];
   let score = 0;
-  let pool = shuffle([...targets[stage], ...extras]);
+  let pool = shuffle([...targets[stage].answer, ...extras]);
 
   const wrap = document.createElement("div");
   wrap.innerHTML = `
@@ -937,13 +943,13 @@ function mountComplimentGame(t){
       <span class="badge">Done: <span class="score" id="doneNo">0</span> / ${targets.length}</span>
     </div>
     <p class="small" style="margin:0 0 8px 0;">
-      Goal: <span class="badge"><span id="goalText">${targets[0].join(" ")}</span></span>
+      Goal: <span class="badge"><span id="goalText">${targets[0].prompt.join(" ")}</span></span>
     </p>
     <div class="sentence" id="sentence"></div>
     <div class="row" style="margin-top:10px;">
       <button id="undoBtn">Undo</button>
       <button class="btn-accent" id="checkBtn2">Check</button>
-      <span class="badge">Built: <span class="score" id="builtCount">0</span> / <span id="goalLen">${targets[0].length}</span></span>
+      <span class="badge">Built: <span class="score" id="builtCount">0</span> / <span id="goalLen">${targets[0].answer.length}</span></span>
     </div>
     <div class="tokens" id="tokens"></div>
     <p class="small" id="msg2"></p>
@@ -959,12 +965,16 @@ function mountComplimentGame(t){
   const goalText = wrap.querySelector("#goalText");
   const goalLen = wrap.querySelector("#goalLen");
 
-  function currentTarget(){
-    return targets[stage];
+  function currentPrompt(){
+    return targets[stage].prompt;
+  }
+
+  function currentAnswer(){
+    return targets[stage].answer;
   }
 
   function refreshPool(){
-    pool = shuffle([...currentTarget(), ...extras]);
+    pool = shuffle([...currentAnswer(), ...extras]);
   }
 
   function render(){
@@ -987,14 +997,14 @@ function mountComplimentGame(t){
 
     stageNo.textContent = String(stage + 1);
     doneNo.textContent = String(score);
-    goalText.textContent = currentTarget().join(" ");
-    goalLen.textContent = String(currentTarget().length);
+    goalText.textContent = currentPrompt().join(" ");
+    goalLen.textContent = String(currentAnswer().length);
     builtCount.textContent = String(built.length);
     setScore(score);
   }
 
   function addWord(w){
-    if (built.length >= currentTarget().length) return;
+    if (built.length >= currentAnswer().length) return;
     built.push(w);
     msg2.textContent = "";
     render();
@@ -1007,7 +1017,7 @@ function mountComplimentGame(t){
   };
 
   wrap.querySelector("#checkBtn2").onclick = () => {
-    const ok = built.join(" ") === currentTarget().join(" ");
+    const ok = built.join(" ") === currentAnswer().join(" ");
     if (!ok){
       msg2.textContent = "❌ Almost! Try a different order 🙂";
       return;
@@ -1043,7 +1053,6 @@ function mountComplimentGame(t){
   render();
   return { reset };
 }
-
 /* Game 5: Unscramble */
 function mountUnscrambleGame(t){
   gameTip.textContent = "Game: unscramble all words correctly.";
@@ -1595,6 +1604,7 @@ show("home");
 </script>
 </body>
 </html>
+
 
 
 
