@@ -12,18 +12,17 @@ body{
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   min-height:100vh;
   padding:24px;
-  color:#3a2b41;
+  color:#c6c6c6;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  background: #ff7ab8 !important;
-  background-image:
-    radial-gradient(900px 500px at 10% 0%, rgba(255,200,230,.9) 0%, transparent 60%),
-    radial-gradient(800px 500px at 90% 10%, rgba(210,190,255,.85) 0%, transparent 55%),
-    radial-gradient(700px 500px at 50% 100%, rgba(255,235,210,.8) 0%, transparent 60%),
-    linear-gradient(180deg,#ffffff 0%,#fff6fb 45%,#fffaf2 100%);
+  background:
+    radial-gradient(circle at 15% 10%, rgba(255,214,230,.55) 0%, transparent 30%),
+    radial-gradient(circle at 85% 15%, rgba(223,212,255,.45) 0%, transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(255,239,220,.38) 0%, transparent 28%),
+    linear-gradient(180deg, #fffefe 0%, #fffafc 50%, #fffdf8 100%);
 }
   .app {
     width: min(980px, 100%);
@@ -59,21 +58,22 @@ body{
   border-radius:28px;
   padding:20px;
 
-  background: rgba(255,255,255,.25);
+  background: rgba(255,255,255,.10);
 
-  border:1px solid rgba(255,255,255,.45);
+  border:1px solid rgba(255,255,255,.40);
 
-  backdrop-filter: blur(30px) saturate(180%);
-  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
 
   box-shadow:
-    0 25px 60px rgba(180,120,160,.15),
-    inset 0 1px 0 rgba(255,255,255,.5);
+    0 20px 45px rgba(193,160,190,.10),
+    inset 0 1px 0 rgba(255,255,255,.45);
 }
 
-  .card > * {
-    position: relative;
-  }
+  .card > *{
+  position:relative;
+  z-index:1;
+}
 
   .title {
     font-size: 20px;
@@ -1627,6 +1627,7 @@ show("home");
 </script>
 </body>
 </html>
+
 
 
 
