@@ -5,249 +5,461 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Happy Women’s Day 💐</title>
   <style>
-:root{
-  --bg:#fff6fb;
-  --card:rgba(255,255,255,.26);
-  --text:#3d2f45;
-  --muted:#7d6e89;
-  --accent:#ff78b2;
-  --ok:#49c57b;
-  --bad:#ff5f7a;
-}
+    :root{
+      --bg:#fff8fc;
+      --text:#39293f;
+      --muted:#7f6b87;
+      --accent:#ff76b0;
+      --accent-2:#cda6ff;
+      --ok:#46c777;
+      --bad:#ff617f;
+
+      --glass-bg: rgba(255,255,255,.14);
+      --glass-bg-strong: rgba(255,255,255,.22);
+      --glass-line: rgba(255,255,255,.42);
+      --glass-line-soft: rgba(255,255,255,.25);
+      --glass-shadow: rgba(183,122,160,.18);
+    }
+
     *{ box-sizing:border-box; }
-body{
-  margin:0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background:
-    radial-gradient(900px 500px at 10% 0%, rgba(255,183,214,.95) 0%, transparent 60%),
-    radial-gradient(800px 500px at 90% 10%, rgba(204,175,255,.78) 0%, transparent 55%),
-    radial-gradient(700px 500px at 50% 100%, rgba(255,228,196,.78) 0%, transparent 60%),
-    linear-gradient(180deg, #fffafd 0%, #fff3fa 45%, #fffaf2 100%);
-  color:var(--text);
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-}
-    .app{ width:min(980px, 100%); }
+
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      background:
+        radial-gradient(1000px 600px at 8% 0%, rgba(255,190,222,.95) 0%, transparent 60%),
+        radial-gradient(880px 560px at 92% 10%, rgba(206,185,255,.85) 0%, transparent 56%),
+        radial-gradient(760px 540px at 50% 100%, rgba(255,233,205,.85) 0%, transparent 62%),
+        linear-gradient(180deg, #fffcff 0%, #fff3fa 48%, #fffaf2 100%);
+      position:relative;
+      overflow-x:hidden;
+    }
+
+    body::before,
+    body::after{
+      content:"";
+      position:fixed;
+      inset:auto;
+      width:420px;
+      height:420px;
+      border-radius:50%;
+      filter: blur(90px);
+      z-index:0;
+      pointer-events:none;
+      opacity:.55;
+      animation: floatBlob 10s ease-in-out infinite;
+    }
+
+    body::before{
+      top:-80px;
+      left:-60px;
+      background:rgba(255,123,181,.35);
+    }
+
+    body::after{
+      right:-80px;
+      bottom:-80px;
+      background:rgba(196,164,255,.35);
+      animation-delay:-4s;
+    }
+
+    @keyframes floatBlob{
+      0%,100%{ transform:translate(0,0) scale(1); }
+      50%{ transform:translate(18px,-12px) scale(1.06); }
+    }
+
+    .app{
+      width:min(1020px, 100%);
+      position:relative;
+      z-index:1;
+    }
+
     .topbar{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
       margin-bottom:14px;
     }
-    .brand{ display:flex; flex-direction:column; gap:4px; }
-    .brand h1{ margin:0; font-size:22px; letter-spacing:.2px; }
-    .brand p{ margin:0; color:var(--muted); font-size:14px; }
-.pill{
-  padding:8px 12px;
-  filter: url(#liquidGlass);
-  border-radius:999px;
-  background:rgba(255,255,255,.24);
-  border:1px solid rgba(255,255,255,.40);
-  color:var(--muted);
-  font-size:13px;
-  backdrop-filter: blur(10px) saturate(130%);
-  -webkit-backdrop-filter: blur(10px) saturate(130%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.28);
-}
-.card{
-  filter: url(#liquidGlass);
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,.34),
-    rgba(255,255,255,.18)
-  );
-  border:1px solid rgba(255,255,255,.42);
-  border-radius:24px;
-  padding:18px;
-  box-shadow:
-    0 20px 60px rgba(181,124,161,.18),
-    inset 0 1px 0 rgba(255,255,255,.38);
-  overflow:hidden;
-  position:relative;
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
-}
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+
+    .brand h1{
+      margin:0;
+      font-size:22px;
+      letter-spacing:.2px;
+      text-shadow: 0 1px 0 rgba(255,255,255,.35);
+    }
+
+    .brand p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .card{
+      position:relative;
+      overflow:hidden;
+      border-radius:28px;
+      padding:20px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.34), rgba(255,255,255,.14)),
+        radial-gradient(circle at top left, rgba(255,255,255,.30), transparent 42%);
+      border:1px solid var(--glass-line);
+      box-shadow:
+        0 30px 80px var(--glass-shadow),
+        inset 0 1px 0 rgba(255,255,255,.52),
+        inset 0 -1px 0 rgba(255,255,255,.06);
+      backdrop-filter: blur(26px) saturate(170%);
+      -webkit-backdrop-filter: blur(26px) saturate(170%);
+      isolation:isolate;
+    }
+
     .card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  filter: url(#liquidGlass);
-  border-radius:24px;
-  pointer-events:none;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.35) 0%,
-      rgba(255,255,255,.08) 35%,
-      rgba(255,255,255,0) 60%
-    );
-}
+      content:"";
+      position:absolute;
+      inset:0;
+      border-radius:inherit;
+      pointer-events:none;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,.50) 0%,
+          rgba(255,255,255,.16) 26%,
+          rgba(255,255,255,.05) 48%,
+          rgba(255,255,255,0) 64%
+        );
+      z-index:0;
+    }
+
+    .card > *{
+      position:relative;
+      z-index:1;
+    }
+
     .grid{ display:grid; gap:14px; }
     .grid.cols2{ grid-template-columns: repeat(2, minmax(0,1fr)); }
     @media (max-width:740px){ .grid.cols2{ grid-template-columns:1fr; } }
-.liquid-glass{
-  background: rgba(255,255,255,.18);
-  backdrop-filter: blur(22px) saturate(180%);
-  -webkit-backdrop-filter: blur(22px) saturate(180%);
-  border: 1px solid rgba(255,255,255,.4);
 
-  box-shadow:
-    0 25px 60px rgba(180,120,160,.2),
-    inset 0 1px 0 rgba(255,255,255,.45);
+    button, input, select{
+      appearance:none;
+      color:var(--text);
+      background:rgba(255,255,255,.20);
+      border:1px solid var(--glass-line);
+      border-radius:18px;
+      font-weight:650;
+      outline:none;
+      backdrop-filter: blur(16px) saturate(165%);
+      -webkit-backdrop-filter: blur(16px) saturate(165%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.35),
+        inset 0 -1px 0 rgba(255,255,255,.06);
+    }
 
-  filter: url(#liquidGlass);
-}
-button{
-  appearance:none;
-  border:0;
-  cursor:pointer;
-  color:var(--text);
-  background: rgba(255,255,255,.28);
-  border:1px solid rgba(255,255,255,.42);
-  padding:12px 14px;
-  border-radius:16px;
-  font-weight:650;
-  transition: transform .08s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
-  backdrop-filter: blur(10px) saturate(135%);
-  -webkit-backdrop-filter: blur(10px) saturate(135%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.28);
-}
-
-    button:hover{
-  background: rgba(255,255,255,.38);
-  border-color: rgba(255,255,255,.55);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.34),
-    0 8px 24px rgba(255,120,178,.10);
-}
-button:active{ transform: translateY(1px); }
     button{
       cursor:pointer;
       padding:12px 14px;
-      transition: transform .08s ease, background .15s ease, border-color .15s ease;
+      transition: transform .08s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
-    button:hover{ background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.20); }
-    button:active{ transform: translateY(1px); }
 
-    input{
-      padding:12px 14px;
+    button:hover{
+      background:rgba(255,255,255,.32);
+      border-color:rgba(255,255,255,.56);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.40),
+        0 12px 28px rgba(255,120,178,.10);
+    }
+
+    button:active{
+      transform:translateY(1px);
+    }
+
+    input, select{
       width:100%;
-      outline:none;
-    }
-    input:focus{
-      border-color: rgba(255,111,177,.45);
-      box-shadow: 0 0 0 3px rgba(255,111,177,.10);
+      padding:12px 14px;
     }
 
-   .btn-accent{
-  background: linear-gradient(135deg, rgba(255,120,178,.26), rgba(255,255,255,.24));
-  border-color: rgba(255,120,178,.34);
-}
-    .btn-ok{ background: rgba(65,209,122,.12); border-color: rgba(65,209,122,.30); }
-    .btn-bad{ background: rgba(255,77,109,.12); border-color: rgba(255,77,109,.30); }
-    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    input:focus, select:focus{
+      border-color: rgba(255,118,176,.50);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.35),
+        0 0 0 4px rgba(255,118,176,.10);
+    }
+
+    .btn-accent{
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,118,176,.26),
+          rgba(205,166,255,.18),
+          rgba(255,255,255,.20)
+        );
+      border-color: rgba(255,118,176,.34);
+    }
+
+    .btn-ok{
+      background: rgba(70,199,119,.14);
+      border-color: rgba(70,199,119,.30);
+    }
+
+    .btn-bad{
+      background: rgba(255,97,127,.14);
+      border-color: rgba(255,97,127,.30);
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
     .muted{ color:var(--muted); }
     .hidden{ display:none !important; }
-    .hr{ height:1px; background:rgba(255,255,255,.12); margin:14px 0; }
-    .title{ font-size:20px; margin:0 0 6px 0; }
-    .subtitle{ margin:0 0 12px 0; color:var(--muted); }
-    .small{ font-size:13px; color:var(--muted); }
-.badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:8px 10px;
-  border-radius:999px;
-  background:rgba(255,255,255,.22);
-  border:1px solid rgba(255,255,255,.38);
-  font-size:13px;
-  color:var(--muted);
-  backdrop-filter: blur(10px) saturate(130%);
-  -webkit-backdrop-filter: blur(10px) saturate(130%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.22);
-}
-    .score{ color:var(--text); font-weight:750; }
-    .center{ text-align:center; }
-    .big{ font-size:34px; margin:10px 0 6px 0; letter-spacing:.2px; }
+    .hr{
+      height:1px;
+      background:rgba(255,255,255,.20);
+      margin:14px 0;
+      box-shadow: 0 1px 0 rgba(255,255,255,.12);
+    }
 
-    .memory{ display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:10px; }
-    @media (max-width:520px){ .memory{ grid-template-columns:repeat(3, minmax(0, 1fr)); } }
+    .title{
+      font-size:20px;
+      margin:0 0 6px 0;
+    }
+
+    .subtitle{
+      margin:0 0 12px 0;
+      color:var(--muted);
+    }
+
+    .small{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .pill{
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.18);
+      border:1px solid var(--glass-line);
+      color:var(--muted);
+      font-size:13px;
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.30),
+        0 8px 18px rgba(255,255,255,.06);
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.16);
+      border:1px solid var(--glass-line);
+      font-size:13px;
+      color:var(--muted);
+      backdrop-filter: blur(16px) saturate(160%);
+      -webkit-backdrop-filter: blur(16px) saturate(160%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.26);
+    }
+
+    .score{
+      color:var(--text);
+      font-weight:750;
+    }
+
+    .center{ text-align:center; }
+    .big{
+      font-size:34px;
+      margin:10px 0 6px 0;
+      letter-spacing:.2px;
+    }
+
+    .game-box,
+    .emoji-card,
+    .ws-grid,
+    .sentence{
+      background:rgba(255,255,255,.14);
+      border:1px solid var(--glass-line-soft);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.22);
+    }
+
+    .game-box{
+      padding:14px;
+      border-radius:20px;
+    }
+
+    /* Memory */
+    .memory{
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:10px;
+    }
+
+    @media (max-width:520px){
+      .memory{ grid-template-columns:repeat(3, minmax(0, 1fr)); }
+    }
+
     .mcard{
-      border-radius:14px; padding:14px 10px; text-align:center;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.12);
-      min-height:54px; display:flex; align-items:center; justify-content:center;
+      border-radius:18px;
+      padding:14px 10px;
+      text-align:center;
+      background:rgba(255,255,255,.16);
+      border:1px solid var(--glass-line-soft);
+      min-height:56px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       user-select:none;
       font-weight:700;
       overflow:hidden;
       text-overflow:ellipsis;
       white-space:nowrap;
+      backdrop-filter: blur(12px) saturate(150%);
+      -webkit-backdrop-filter: blur(12px) saturate(150%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.22);
     }
-    .mcard.revealed{ background:rgba(255,111,177,.14); border-color: rgba(255,111,177,.34); }
-    .mcard.matched{ background:rgba(65,209,122,.16); border-color: rgba(65,209,122,.35); }
-    
-    .question{ font-size:18px; margin:0 0 12px 0; }
-    .choices{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; }
-    @media (max-width:520px){ .choices{ grid-template-columns:1fr; } }
-    .choice{ padding:12px; border-radius:14px; text-align:center; font-weight:750; }
 
-    .ws-wrap{ display:flex; gap:14px; flex-wrap:wrap; }
-    .ws-grid{
-      display:grid; grid-template-columns:repeat(8, 34px); gap:6px;
-      padding:10px; border-radius:14px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.12);
+    .mcard.revealed{
+      background:rgba(255,118,176,.18);
+      border-color: rgba(255,118,176,.34);
     }
+
+    .mcard.matched{
+      background:rgba(70,199,119,.18);
+      border-color: rgba(70,199,119,.35);
+    }
+
+    /* Shared quiz */
+    .question{
+      font-size:18px;
+      margin:0 0 12px 0;
+    }
+
+    .choices{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0,1fr));
+      gap:10px;
+    }
+
+    @media (max-width:520px){
+      .choices{ grid-template-columns:1fr; }
+    }
+
+    .choice{
+      padding:12px;
+      border-radius:16px;
+      text-align:center;
+      font-weight:750;
+    }
+
+    /* Word search */
+    .ws-wrap{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .ws-grid{
+      display:grid;
+      grid-template-columns:repeat(8, 34px);
+      gap:6px;
+      padding:12px;
+      border-radius:18px;
+    }
+
     .ws-cell{
-      width:34px; height:34px; border-radius:10px;
-      display:flex; align-items:center; justify-content:center;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
+      width:34px;
+      height:34px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(255,255,255,.18);
+      border:1px solid rgba(255,255,255,.30);
       font-weight:800;
       user-select:none;
+      backdrop-filter: blur(10px) saturate(150%);
+      -webkit-backdrop-filter: blur(10px) saturate(150%);
     }
-    .ws-cell.active{ background:rgba(255,111,177,.16); border-color: rgba(255,111,177,.34); }
-    .ws-cell.found{ background:rgba(65,209,122,.16); border-color: rgba(65,209,122,.35); }
+
+    .ws-cell.active{
+      background:rgba(255,118,176,.18);
+      border-color: rgba(255,118,176,.34);
+    }
+
+    .ws-cell.found{
+      background:rgba(70,199,119,.18);
+      border-color: rgba(70,199,119,.35);
+    }
+
     .ws-list{ min-width:220px; }
+
     .ws-word{
-      display:flex; justify-content:space-between; align-items:center;
-      padding:10px 12px; border-radius:12px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.10);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.24);
       margin-bottom:8px;
       font-weight:700;
+      backdrop-filter: blur(12px) saturate(145%);
+      -webkit-backdrop-filter: blur(12px) saturate(145%);
     }
-    .ws-word.done{ background:rgba(65,209,122,.12); border-color: rgba(65,209,122,.30); }
 
-    /* Game 4: Compliment builder */
-    .tokens{ display:flex; gap:8px; flex-wrap:wrap; margin:10px 0; }
+    .ws-word.done{
+      background:rgba(70,199,119,.14);
+      border-color: rgba(70,199,119,.28);
+    }
+
+    /* Tokens / sentence */
+    .tokens{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin:10px 0;
+    }
+
     .token{
-      padding:10px 12px; border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.14);
+      padding:10px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.20);
+      border:1px solid rgba(255,255,255,.34);
       font-weight:750;
       user-select:none;
-    }
-    .sentence{
-      min-height:52px;
-      padding:12px 14px; border-radius:14px;
-      background:rgba(255,255,255,.05);
-      border:1px dashed rgba(255,255,255,.22);
-      display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.24);
     }
 
-    /* Game 5-9 helpers */
-.game-box{
-  padding:14px;
-  filter: url(#liquidGlass);
-  border-radius:18px;
-  background:rgba(255,255,255,.18);
-  border:1px solid rgba(255,255,255,.34);
-  backdrop-filter: blur(12px) saturate(130%);
-  -webkit-backdrop-filter: blur(12px) saturate(130%);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.22);
-}
+    .sentence{
+      min-height:56px;
+      padding:12px 14px;
+      border-radius:18px;
+      border:1px dashed rgba(255,255,255,.36);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    /* Other helpers */
     .scramble-word{
       font-size:28px;
       font-weight:800;
@@ -255,81 +467,64 @@ button:active{ transform: translateY(1px); }
       text-align:center;
       margin:10px 0 14px 0;
     }
+
     .emoji-grid{
       display:grid;
       grid-template-columns:repeat(2, minmax(0,1fr));
       gap:12px;
     }
-    @media (max-width:520px){ .emoji-grid{ grid-template-columns:1fr; } }
-    .emoji-card{
-      padding:14px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.05);
+
+    @media (max-width:520px){
+      .emoji-grid{ grid-template-columns:1fr; }
     }
+
+    .emoji-card{
+      padding:16px;
+      border-radius:20px;
+    }
+
     .emoji-big{
       font-size:34px;
       margin-bottom:10px;
       text-align:center;
     }
+
     .audio-player{
       width:100%;
       margin:10px 0;
-      filter: hue-rotate(-10deg) saturate(0.9);
+      filter: saturate(1.05) brightness(1.02);
     }
-/* LISTENING GAME */
-select{
-  appearance:none;
-  color:var(--text);
-  background: rgba(255,255,255,.34);
-  border:1px solid rgba(255,255,255,.45);
-  border-radius:14px;
-  font-weight:650;
-  padding:12px 14px;
-  width:100%;
-}
 
-.listen-grid{
-  display:grid;
-  gap:12px;
-}
+    /* Listening */
+    .listen-grid{
+      display:grid;
+      gap:12px;
+    }
 
-.listen-row{
-  display:grid;
-  grid-template-columns: 1.1fr 1fr 1fr;
-  gap:10px;
-  align-items:center;
-}
+    .listen-row{
+      display:grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      gap:10px;
+      align-items:center;
+    }
 
-.person-name{
-  font-weight:800;
-}
+    @media (max-width:720px){
+      .listen-row{ grid-template-columns:1fr; }
+    }
+
+    .person-name{
+      font-weight:800;
+    }
+
     canvas#confetti{
-      position:fixed; inset:0; pointer-events:none; z-index:50;
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:50;
     }
   </style>
 </head>
 <body>
-  <body>
-
-<svg style="position:absolute;width:0;height:0">
-  <filter id="liquidGlass">
-    <feTurbulence 
-      type="fractalNoise"
-      baseFrequency="0.01"
-      numOctaves="2"
-      result="noise"
-    />
-
-    <feDisplacementMap
-      in="SourceGraphic"
-      in2="noise"
-      scale="35"
-      xChannelSelector="R"
-      yChannelSelector="G"
-    />
-  </filter>
-</svg>
 <canvas id="confetti"></canvas>
 
 <div class="app">
@@ -342,7 +537,6 @@ select{
   </div>
 
   <div class="card">
-    <!--home page-->
     <section id="home">
       <h2 class="title">Choose your name</h2>
       <p class="subtitle">Each button leads to a personal mini-game and a surprise.</p>
@@ -387,7 +581,6 @@ select{
 </div>
 
 <script>
-/*pookies*/
 const CHARACTERS = [
   {
     id: "c1",
@@ -421,8 +614,8 @@ const CHARACTERS = [
     id: "c5",
     name: "Kira)",
     game: "listeningmatch",
-    intro: "HEY Kira! i hope u listen carefully and choose the correct answer as always🎧",
-    win: "Kira, i wish you joy warmth wonderful people and surprises this spring (Happy International Women's Day!🌷good luck pookie)"
+    intro: "HEY Kira! I hope you listen carefully and choose the correct answer as always 🎧",
+    win: "Kira, I wish you joy, warmth, wonderful people, and lovely surprises this spring. Happy International Women's Day! 🌷"
   },
   {
     id: "c6",
@@ -454,7 +647,7 @@ const CHARACTERS = [
   }
 ];
 
-/* ===== ROUTER / UI ===== */
+/* UI */
 const el = (id) => document.getElementById(id);
 
 const home = el("home");
@@ -539,6 +732,7 @@ btnReset.onclick = () => currentGame?.reset?.();
 function setScore(n){ scoreLabel.textContent = String(n); }
 function unlockWin(){ btnWin.classList.remove("hidden"); fireConfetti(40); }
 
+/* Game 1: Memory */
 function mountMemoryGame(t){
   gameTip.textContent = "Game: reveal and match all pairs (EN ↔ UA).";
 
@@ -636,7 +830,7 @@ function mountMemoryGame(t){
   return { reset };
 }
 
-/* ===== GAME 2: GRAMMAR ===== */
+/* Game 2: Grammar */
 function mountGrammarGame(t){
   gameTip.textContent = "Game: choose the correct answer. Score 5/7 to win!";
 
@@ -699,6 +893,7 @@ function mountGrammarGame(t){
       btn.classList.add("btn-bad");
       feedback.textContent = `❌ Oops! Correct answer: ${qs[i].a}`;
     }
+
     [...choices.querySelectorAll("button")].forEach(x => x.disabled = true);
 
     setTimeout(() => {
@@ -713,7 +908,8 @@ function mountGrammarGame(t){
   }
 
   function reset(){
-    i = 0; score = 0;
+    i = 0;
+    score = 0;
     btnWin.classList.add("hidden");
     render();
   }
@@ -721,7 +917,8 @@ function mountGrammarGame(t){
   render();
   return { reset };
 }
-  
+
+/* Game 3: Word Search */
 function mountWordSearchGame(t){
   gameTip.textContent = "Game: click letters to build a word, then press Check.";
 
@@ -846,7 +1043,7 @@ function mountWordSearchGame(t){
   return { reset };
 }
 
-/* ===== GAME 4: COMPLIMENT BUILDER ===== */
+/* Game 4: Compliment Builder */
 function mountComplimentGame(t){
   gameTip.textContent = "Game: build BOTH compliments in the correct order.";
 
@@ -975,116 +1172,7 @@ function mountComplimentGame(t){
   return { reset };
 }
 
-/* ===== GAME 5: AUDIO QUIZ ===== */
-function mountAudioGame(t){
-  gameTip.textContent = "Game: listen to the audio and choose the correct answer.";
-
-  const qs = [
-    {
-      audio: "audio1.mp3",
-      q: "What did you hear?",
-      a: "Happy Women's Day",
-      opts: ["Happy Women's Day", "Happy Birthday", "Good evening"]
-    },
-    {
-      audio: "audio2.mp3",
-      q: "Choose the phrase you heard.",
-      a: "You are a wonderful teacher",
-      opts: ["You are a wonderful teacher", "You are a busy teacher", "You are a favorite singer"]
-    },
-    {
-      audio: "audio3.mp3",
-      q: "Which greeting was in the audio?",
-      a: "Wishing you joy and smiles",
-      opts: ["Wishing you joy and smiles", "Time for a math test", "Please open your notebook"]
-    }
-  ];
-
-  let i = 0;
-  let score = 0;
-
-  const wrap = document.createElement("div");
-  wrap.innerHTML = `
-    <div class="row" style="justify-content:space-between; margin-bottom:10px;">
-      <span class="badge">Question: <span class="score" id="aqi">1</span> / ${qs.length}</span>
-      <span class="badge">Correct: <span class="score" id="ags">0</span></span>
-    </div>
-    <div class="game-box">
-      <p class="question" id="aqtext"></p>
-      <audio controls class="audio-player" id="audioPlayer">
-        <source src="${qs[0].audio}" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
-      <div class="choices" id="achoices"></div>
-      <p class="small" id="afeedback"></p>
-      <p class="small">Put your mp3 files near this HTML file and rename them to: audio1.mp3, audio2.mp3, audio3.mp3</p>
-    </div>
-  `;
-  gameMount.appendChild(wrap);
-
-  const aqi = wrap.querySelector("#aqi");
-  const ags = wrap.querySelector("#ags");
-  const aqtext = wrap.querySelector("#aqtext");
-  const audioPlayer = wrap.querySelector("#audioPlayer");
-  const achoices = wrap.querySelector("#achoices");
-  const afeedback = wrap.querySelector("#afeedback");
-
-  function render(){
-    aqi.textContent = String(i + 1);
-    ags.textContent = String(score);
-    setScore(score);
-    aqtext.textContent = qs[i].q;
-    afeedback.textContent = "";
-    audioPlayer.innerHTML = `<source src="${qs[i].audio}" type="audio/mpeg">`;
-    audioPlayer.load();
-
-    achoices.innerHTML = "";
-    qs[i].opts.forEach(opt => {
-      const b = document.createElement("button");
-      b.className = "choice";
-      b.textContent = opt;
-      b.onclick = () => pick(opt, b);
-      achoices.appendChild(b);
-    });
-  }
-
-  function pick(opt, btn){
-    const ok = opt === qs[i].a;
-    if (ok){
-      btn.classList.add("btn-ok");
-      afeedback.textContent = "✅ Correct!";
-      score++;
-      setScore(score);
-      ags.textContent = String(score);
-    } else {
-      btn.classList.add("btn-bad");
-      afeedback.textContent = `❌ Correct answer: ${qs[i].a}`;
-    }
-
-    [...achoices.querySelectorAll("button")].forEach(x => x.disabled = true);
-
-    setTimeout(() => {
-      i++;
-      if (i >= qs.length){
-        if (score >= 2) unlockWin();
-        else afeedback.textContent = "Almost! Press Restart and try again 🎧";
-        return;
-      }
-      render();
-    }, 900);
-  }
-
-  function reset(){
-    i = 0;
-    score = 0;
-    btnWin.classList.add("hidden");
-    render();
-  }
-
-  render();
-  return { reset };
-}
-
+/* Game 5: Unscramble */
 function mountUnscrambleGame(t){
   gameTip.textContent = "Game: unscramble all words correctly.";
 
@@ -1158,6 +1246,7 @@ function mountUnscrambleGame(t){
   return { reset };
 }
 
+/* Game 6: Emoji */
 function mountEmojiGame(t){
   gameTip.textContent = "Game: choose the correct word for each emoji.";
 
@@ -1245,6 +1334,7 @@ function mountEmojiGame(t){
   return { reset };
 }
 
+/* Game 7: Sentence */
 function mountSentenceGame(t){
   gameTip.textContent = "Game: put the words in the correct order.";
 
@@ -1351,6 +1441,7 @@ function mountSentenceGame(t){
   return { reset };
 }
 
+/* Game 8: Guess */
 function mountGuessGame(t){
   gameTip.textContent = "Game: read the clue and guess the word.";
 
@@ -1423,6 +1514,8 @@ function mountGuessGame(t){
   render();
   return { reset };
 }
+
+/* Game 9: Listening Match */
 function mountListeningMatchGame(t){
   gameTip.textContent = "Game: listen to the audio, match each person to the correct event and feeling.";
 
@@ -1467,7 +1560,7 @@ function mountListeningMatchGame(t){
         Your browser does not support the audio element.
       </audio>
 
-      <p class="small">Make sure the file <strong>listen-match.mp3</strong> is in the same folder as your HTML file.</p>
+      <p class="small">Put <strong>listen-match.mp3</strong> in the same folder as this HTML file.</p>
 
       <div class="listen-grid" id="listenGrid"></div>
 
@@ -1552,6 +1645,8 @@ function mountListeningMatchGame(t){
   renderRows();
   return { reset };
 }
+
+/* Utils */
 function shuffle(arr){
   for (let i = arr.length - 1; i > 0; i--){
     const j = Math.floor(Math.random() * (i + 1));
@@ -1560,6 +1655,7 @@ function shuffle(arr){
   return arr;
 }
 
+/* Confetti */
 const confettiCanvas = document.getElementById("confetti");
 const ctx = confettiCanvas.getContext("2d");
 let confettiPieces = [];
@@ -1629,7 +1725,3 @@ show("home");
 </script>
 </body>
 </html>
-
-
-
-
